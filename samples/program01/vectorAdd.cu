@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cuda_runtime.h>
 #include <chrono>
+#include <cstdlib>
 
 // Device 
 __global__ void vectorAdd(const float* a, const float* b, float* c, int n)
@@ -25,10 +26,12 @@ void vectorAddCPU(const float* A, const float* B, float* c, const int N)
     }
 }
 
-int main() {
-    //const int N = 512; // CPU win
-    //const int N = 1000000; // 1M GPU win
-    const int N =   1000000000; // 1G GPU win
+int main(int argc, char** argv) {
+    int N = 512;
+    if (argc >= 2)
+    {
+        N = atoi(argv[1]);
+    }
     size_t size = N * sizeof(float); // calc allocation size
 
     // --- CUDA ---
@@ -69,16 +72,17 @@ int main() {
     // some vectors will not be calculated.
     // to include all N, we need to take ceil here
     int blocksPerGrid = (N + threadsPerBlock - 1) / threadsPerBlock;
-    vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, N);
 
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
     cudaEventCreate(&stop);
 
     cudaEventRecord(start);
-    cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost); // get result
+    vectorAdd<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, N);
     cudaEventRecord(stop);
     cudaEventSynchronize(stop);
+
+    cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost); // get result
 
     float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
