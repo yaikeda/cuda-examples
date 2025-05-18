@@ -8,9 +8,12 @@ theme = "hugo-PaperMod"
 
 [params]
   author = "yaikeda"
-  defaultTheme = "auto"
+  defaultTheme = "light"
   ShowReadingTime = true
   ShowShareButtons = true
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/yasunari-ikeda/"
 
 [markup]
   [markup.highlight]
