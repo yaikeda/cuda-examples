@@ -17,9 +17,6 @@ theme = "hugo-PaperMod"
     name = "linkedin"
     url = "https://www.linkedin.com/in/yasunari-ikeda/"
 
-  [[params.homeInfoParams]]
-    Title = "CUDA Examples"
-    Content = "Learn CUDA" 
 [markup]
   [markup.highlight]
     noClasses = false
