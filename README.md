@@ -11,19 +11,16 @@ Each experiment targets specific aspects of CUDA optimization, such as memory ac
 - Explore real-world performance characteristics (shared memory, warp divergence, etc.)
 - Summarize key findings in short blog posts (linked below)
 
-<!--
 ## Blog
 
 Brief write-ups are published on my technical blog:  
-👉 [https://your-github-pages-url.com](https://your-github-pages-url.com)
--->
-<!--
+👉 [https://your-github-pages-url.com](https://yaikeda.github.io/cuda-examples/)
+
 ## Environment
 
-- CUDA Toolkit: [version you're using]
-- Platform: Linux / WSL2 / Windows + Visual Studio
-- Profiling: Nsight Systems / Nsight Compute
--->
+- CUDA Toolkit: 
+- Platform: Windows + Power Shell
+<!--- Profiling: Nsight Systems / Nsight Compute-->
 
 ## License
 
