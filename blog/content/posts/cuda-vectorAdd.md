@@ -28,7 +28,7 @@ This experiment is part of my hands-on learning in GPU programming and performan
 ### CPU Version
 
 ```cpp
-void vectorAddCPU(const float* A, const float* B, float* C, int N) {
+void vectorAddCPU(const float* A, const float* B, float* C, const int N) {
     for (int i = 0; i < N; ++i)
         C[i] = A[i] + B[i];
 }
@@ -46,6 +46,7 @@ __global__ void vectorAdd(const float* A, const float* B, float* C, int N) {
 ## Benchmark Results
 
 I tested both versions across varying data sizes.
+★ is faster 
 
 | N (Elements)     | CPU Time (ms) | GPU Time (ms) |
 |------------------|---------------|----------------|
@@ -53,7 +54,7 @@ I tested both versions across varying data sizes.
 | 1,000,000        | 1.5718        | ★0.5168         |
 | 1,000,000,000    | 2670.95       | ★36.4035        |
 
-★ is faster 
+
 ---
 
 ## Analysis
@@ -69,7 +70,7 @@ I tested both versions across varying data sizes.
 - Always guard against out-of-bounds access in CUDA kernels using `if (i < N)`.
 - For real-time or low-latency systems, overlapping transfers (`cudaMemcpyAsync`) with kernel execution may be essential.
 - CUDA features
-    - *__global__* : Indicates the device code
+    - *\_\_global\_\_* : Indicates the device code
     - *cudaMalloc* : GPU malloc()
     - *cudaMemcpy* : Copy data between host and device
     - *cudaMemcpyAAAToBBB* : Defines the mode of transfer direction
