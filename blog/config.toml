@@ -11,6 +11,8 @@ theme = "hugo-PaperMod"
   defaultTheme = "light"
   ShowReadingTime = true
   ShowShareButtons = true
+  ShareButtons = ["linkedin"]
+
   [[params.socialIcons]]
     name = "linkedin"
     url = "https://www.linkedin.com/in/yasunari-ikeda/"
