@@ -1,0 +1,16 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "CUDA Examples"
+theme = "hugo-PaperMod"
+
+paginate = 5
+
+[params]
+  author = "yaikeda"
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowShareButtons = true
+
+[markup]
+  [markup.highlight]
+    noClasses = false
