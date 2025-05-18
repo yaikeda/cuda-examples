@@ -18,8 +18,9 @@ Brief write-ups are published on my technical blog:
 
 ## Environment
 
-- CUDA Toolkit: 
+- CUDA Toolkit: 12.6
 - Platform: Windows + Power Shell
+- Visual Studio: 2022 (not use IDE but cl.exe)
 <!--- Profiling: Nsight Systems / Nsight Compute-->
 
 ## License
