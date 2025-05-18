@@ -3,7 +3,8 @@ languageCode = "en-us"
 title = "CUDA Examples"
 theme = "hugo-PaperMod"
 
-paginate = 5
+[pagination]
+  pagerSize = 5
 
 [params]
   author = "yaikeda"
