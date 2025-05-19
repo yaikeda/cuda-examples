@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://yaikeda.github.io/cuda-examples/"
 languageCode = "en-us"
 title = "CUDA Examples"
 theme = "hugo-PaperMod"
