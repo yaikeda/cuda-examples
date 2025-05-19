@@ -49,7 +49,7 @@ void* use_cudaMalloc() {
 ```
 
 #### `nvidia-smi` Before and After
-![Before]({{"images/memoryAllocation_1.png" | absURL }} )
+![Before](/images/memoryAllocation_1.png)
 ![After]({{"images/memoryAllocation_2.png" | absURL }} )
 
 ---
