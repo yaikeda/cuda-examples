@@ -83,7 +83,7 @@ I tested both versions across varying data sizes.
 
 ## GitHub
 
-👉 [CUDA Examples GitHub Repository](https://github.com/yaikeda/cuda-examples/tree/main/samples/program01)
+👉 [CUDA Examples GitHub Repository](https://github.com/yaikeda/cuda-examples)
 
 ---
 
