@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "name": "Win64",
+      "includePath": [
+        "${CUDA_PATH}/include",
+        "${workspaceFolder}/**"
+      ],
+      "defines": [],
+      "intelliSenseMode": "windows-msvc-x64",
+      "compilerPath": "${CUDA_PATH}/bin/nvcc.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}

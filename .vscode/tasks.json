@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build CUDA",
+      "type": "shell",
+      "command": "nvcc",
+      "args": [
+        "${file}",
+        "-o",
+        "${workspaceFolder}/samples//build/${fileBasenameNoExtension}.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
