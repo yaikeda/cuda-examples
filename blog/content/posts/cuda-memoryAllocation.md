@@ -49,8 +49,8 @@ void* use_cudaMalloc() {
 ```
 
 #### `nvidia-smi` Before and After
-![Before]( images/memoryAllocation_1.png )
-![After]( images/memoryAllocation_2.png )
+![Before]({{"images/memoryAllocation_1.png" | relURL }} )
+![After]({{"images/memoryAllocation_2.png" | relURL }} )
 
 ---
 
@@ -71,13 +71,13 @@ void* use_cudaMallocManaged() {
 ```
 
 #### `nvidia-smi` Before and After
-![Before]( images/memoryAllocation_3.png )
-![After]( images/memoryAllocation_4.png )
+![Before]( {{"images/memoryAllocation_3.png" | relURL }} )
+![After]( {{"images/memoryAllocation_4.png" | relURL }} )
 
 ---
 
 The usage of VRAM can be seen on Windows Task Manager.
-![TaskManager]( images/memoryAllocation_TaskManager.png)
+![TaskManager]( {{"images/memoryAllocation_TaskManager.png" | relURL }})
 
 ---
 
@@ -101,8 +101,8 @@ void* use_cudaHostAlloc() {
 
 The result of `nvidia-smi` looks similar with the result in 2. 
 
-![Before]( images/memoryAllocation_5.png )
-![After]( images/memoryAllocation_6.png )
+![Before]( {{"images/memoryAllocation_5.png" | relURL }} )
+![After]( {{"images/memoryAllocation_6.png" | relURL }} )
 
 ---
 
