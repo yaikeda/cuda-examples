@@ -49,8 +49,8 @@ void* use_cudaMalloc() {
 ```
 
 #### `nvidia-smi` Before and After
-![Before](/images/memoryAllocation_1.png)
-![After]({{"images/memoryAllocation_2.png" | absURL }} )
+![Before](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_1.png)
+![After](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_2.png)
 
 ---
 
@@ -71,13 +71,13 @@ void* use_cudaMallocManaged() {
 ```
 
 #### `nvidia-smi` Before and After
-![Before]( {{"images/memoryAllocation_3.png" | absURL }} )
-![After]( {{"images/memoryAllocation_4.png" | absURL }} )
+![Before](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_3.png)
+![After](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_4.png)
 
 ---
 
 The usage of VRAM can be seen on Windows Task Manager.
-![TaskManager]( {{"images/memoryAllocation_TaskManager.png" | absURL }})
+![TaskManager](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_TaskManager.png)
 
 ---
 
@@ -101,8 +101,8 @@ void* use_cudaHostAlloc() {
 
 The result of `nvidia-smi` looks similar with the result in 2. 
 
-![Before]( {{"images/memoryAllocation_5.png" | absURL }} )
-![After]( {{"images/memoryAllocation_6.png" | absURL }} )
+![Before](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_5.png)
+![After](https://yaikeda.github.io/cuda-examples/images/memoryAllocation_6.png)
 
 ---
 
