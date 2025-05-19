@@ -44,15 +44,35 @@ void* use_cudaHostAlloc() {
     return nullptr;
 }
 
+void* use_cudaHostAlloc_cudaHostAllocMapped()
+{
+    void* h_ptr = nullptr;
+
+    if(isSuccess(cudaHostAlloc(&h_ptr, SIZE, cudaHostAllocMapped)))
+    {
+        void* d_ptr = nullptr;
+        if(isSuccess(cudaHostGetDevicePointer(&d_ptr, h_ptr, 0))) // flag must be zero for now
+        {
+            std::cout << "Zero-copy mapping succeeded. Host = " << h_ptr << ", Device =" << d_ptr << std::endl;
+            return h_ptr;
+        }
+        cudaFree(h_ptr);
+        return nullptr;
+    }
+    return nullptr;
+}
+
 int main() 
 {
     void* device_ptr = use_cudaMalloc();
     void* unified_ptr = use_cudaMallocManaged();
     void* host_ptr = use_cudaHostAlloc();
+    void* host_ptr2 = use_cudaHostAlloc_cudaHostAllocMapped();
 
     std::cin.get(); // pause
 
     cudaFree(device_ptr);
     cudaFree(unified_ptr);
     cudaFree(host_ptr);
+    cudaFree(host_ptr2);
 }
