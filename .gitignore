@@ -2,3 +2,4 @@
 *.exp
 *.lib
 public/
+blog/.hugo_build.lock
