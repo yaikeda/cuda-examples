@@ -14,7 +14,7 @@ Each experiment targets specific aspects of CUDA optimization, such as memory ac
 ## Blog
 
 Brief write-ups are published on my technical blog:  
-👉 [https://yaikeda.github.io/cuda-examples-blog/](https://yaikeda.github.io/cuda-examples-blog/)
+👉 <a href="https://yaikeda.github.io/cuda-examples-blog/" target="_blank">https://yaikeda.github.io/cuda-examples-blog/</a>
 
 ## Environment
 
