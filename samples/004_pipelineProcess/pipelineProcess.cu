@@ -1,6 +1,7 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
+// Zero fill function
 std::string ZeroPadding(int digits, int num)
 {
     std::ostringstream oss;
@@ -8,6 +9,7 @@ std::string ZeroPadding(int digits, int num)
     return oss.str();
 }
 
+// Small Image Load and Stock class
 class ImageStocker
 {
     public:
@@ -17,7 +19,6 @@ class ImageStocker
             {
                 std::string imgPath = dir + "/img_" + ZeroPadding(2, i) + ".png";
                 std::cout << "Image Path: " << imgPath << std::endl;
-
                 cv::Mat img = cv::imread(imgPath);
                 if (img.empty()) {
                     printf("failed to load image\n");
@@ -55,10 +56,13 @@ int main(int argc, char** argv) {
     size_t imgNum = std::atoi(argv[2]);
     ImageStocker stocker(imgDir, imgNum);
     
-    for (int i = 0; i < stocker.NumImages(); i++)
-    {
-        cv::imshow("Test", stocker.Get(i));
-        cv::waitKey(0);
-    }
+
+
+    // Check images with GUI
+    // for (int i = 0; i < stocker.NumImages(); i++)
+    // {
+    //     cv::imshow("Test", stocker.Get(i));
+    //     cv::waitKey(0);
+    // }
     return 0;
 }
