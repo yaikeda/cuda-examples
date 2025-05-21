@@ -33,7 +33,6 @@ class ImageStocker
         }
         cv::Mat Get(int id)
         {
-            std::cout << NumImages() << " " << id << std::endl;
             if (NumImages() <= id)
             {
                 std::cout << "m_images.size() <= id" << std::endl;
@@ -45,6 +44,21 @@ class ImageStocker
         std::vector<cv::Mat> m_images;
 };
 
+void use_OpenCV(ImageStocker stocker)
+{
+    for (int i = 0; i < stocker.NumImages(); i++)
+    {
+        cv::Mat grayImage;
+        cv::cvtColor(stocker.Get(i), grayImage, cv::COLOR_BGR2GRAY);
+        std::string outpath = "004_opencv_img_" + ZeroPadding(2, i) + ".png";
+        if (!cv::imwrite(outpath, grayImage)) {
+            std::cerr << "Failed to save image to " << outpath << std::endl;
+            continue;
+        }
+        std::cout << "Saved image to: " << outpath << std::endl;
+    }
+}
+
 // Expected input: a.exe C:\path\to\image\folder num-images
 int main(int argc, char** argv) {
     if (argc < 3)
@@ -55,8 +69,8 @@ int main(int argc, char** argv) {
     std::string imgDir = argv[1];
     size_t imgNum = std::atoi(argv[2]);
     ImageStocker stocker(imgDir, imgNum);
-    
-
+    std::string baseDir = argv[3];
+    use_OpenCV(stocker);
 
     // Check images with GUI
     // for (int i = 0; i < stocker.NumImages(); i++)
