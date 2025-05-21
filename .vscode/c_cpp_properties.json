@@ -4,6 +4,8 @@
       "name": "Win64",
       "includePath": [
         "${CUDA_PATH}/include",
+        "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/include",
+        "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/include/opencv2",
         "${workspaceFolder}/**"
       ],
       "defines": [],
