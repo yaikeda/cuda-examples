@@ -12,7 +12,8 @@
         "-L", "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/x64/vc16/lib",
         "-lopencv_world4110",
         "-I", "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/include",
-        "-I", "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/include/opencv2"
+        "-I", "${workspaceFolder}/samples/thirdparty/opencv4-11-0/build/include/opencv2",
+        "-std=c++17"
       ],
       "group": {
         "kind": "build",

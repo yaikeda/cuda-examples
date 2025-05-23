@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iomanip>
 #include <opencv2/opencv.hpp>
+#include <vector>
+#include <filesystem>
 
 // Zero fill function
 std::string ZeroPadding(int digits, int num)
@@ -11,24 +13,42 @@ std::string ZeroPadding(int digits, int num)
     return oss.str();
 }
 
+std::vector<std::string> GetImageFiles(const std::string& dirPath)
+{
+    std::vector<std::string> result;
+    for (const auto& entry : std::filesystem::directory_iterator(dirPath))
+    {
+        if (!entry.is_regular_file()) continue;
+        auto path = entry.path();
+        auto ext = path.extension().string();
+        if (ext == ".jpg" || ext == ".png" || ext == ".bmp")
+        {
+            result.push_back(path.string());
+        }
+    }
+    std::sort(result.begin(), result.end());
+    return result;
+}
+
 // Small Image Load and Stock class
 class ImageStocker
 {
     public:
-        ImageStocker(std::string dir, int count)
+        bool LoadImages(const std::string& dirPath)
         {
-            for (int i = 1; i <= count; i++)
+            auto files = GetImageFiles(dirPath);
+            for (const std::string& file : files)
             {
-                std::string imgPath = dir + "/img_" + ZeroPadding(2, i) + ".png";
-                std::cout << "Image Path: " << imgPath << std::endl;
-                cv::Mat img = cv::imread(imgPath);
+                std::cout << "Image Path: " << file << std::endl;
+                cv::Mat img = cv::imread(file);
                 if (img.empty()) {
                     printf("failed to load image\n");
-                    break;
+                    return false;
                 }
                 m_images.push_back(img);
             }
-        } 
+            return true;
+        }
         int NumImages()
         {
             return m_images.size();

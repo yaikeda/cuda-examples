@@ -72,14 +72,14 @@ void use_SequentialProcess(ImageStocker stocker)
 
 int main(int argc, char** argv)
 {
-    if(argc < 3)
+    if(argc < 2)
     {
-        std::cerr << "Usage: " << argv[0] << " <image_dir> <num_images>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <image_dir>" << std::endl;
         return 1;
     }
     std::string imgDir = argv[1];
-    size_t imgNum = std::atoi(argv[2]);
-    ImageStocker stocker(imgDir, imgNum);
+    ImageStocker stocker;
+    stocker.LoadImages(imgDir);
     use_SequentialProcess(stocker);
     return 0;
 }
