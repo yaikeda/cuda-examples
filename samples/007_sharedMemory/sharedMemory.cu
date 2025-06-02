@@ -5,60 +5,49 @@
 #define REPEAT 1000
 #define WIDTH 1000
 #define HEIGHT 1000
+#define FILTER_SIZE 3 // (FILTER_SIZE - 1) * 0.5  (ex: 3->1, 5->2) 
 
 __global__ void blur_global(const float* input, float* output, int width, int height)
 {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-    if (x < 2 || x >= width - 2 || y < 2 || y >= height - 2) return;
+    if (x < FILTER_SIZE || x >= width - FILTER_SIZE || y < FILTER_SIZE || y >= height - FILTER_SIZE) return;
 
     float sum = 0.0f;
-    for (int dy = -2; dy <= 2; dy++) {
-        for (int dx = -2; dx <= 2; dx++) {
+    for (int dy = -FILTER_SIZE; dy <= FILTER_SIZE; dy++) {
+        for (int dx = -FILTER_SIZE; dx <= FILTER_SIZE; dx++) {
             sum += input[(y + dy) * width + (x + dx)];
         }
     }
-    sum = sqrtf(sum * sum + 0.001f);
-    output[y * width + x] = sum / 9.0f; // "f" is important for decreasing the number of implicit cast
+    output[y * width + x] = sum / (FILTER_SIZE * 2 + 1); // "f" is important for decreasing the number of implicit cast
 }
 
 __global__ void blur_shared(const float* input, float* output, int width, int height) {
-    __shared__ float tile[BLOCK_SIZE + 4][BLOCK_SIZE + 4]; // shared mamory (can be accessed from same block)
+    __shared__ float tile[BLOCK_SIZE + FILTER_SIZE * 2][BLOCK_SIZE + FILTER_SIZE * 2]; // shared mamory (can be accessed from same block)
 
     int tx = threadIdx.x, ty = threadIdx.y;
     int x = blockIdx.x * BLOCK_SIZE + tx;
     int y = blockIdx.y * BLOCK_SIZE + ty;
 
-    // Copy global input values to the local tile array
-    // Only 3x3 = 9 pixels are needed for this thread 
-    for (int dy = -2; dy <= 2; dy++) {
-        for (int dx = -2; dx <= 2; dx++) {
-            int localx = tx + dx + 2; // local tile coordinate 
-            int localy = ty + dy + 2;
-            int globalx = x + dx; // Global memory coordinate
-            int globaly = y + dy;
-            globalx = max(0, min(globalx, width - 2));
-            globaly = max(0, min(globaly, height - 2));
-            tile[localx][localy] = input[globaly * width + globalx];
-        }
-    }
+    int globalx = globalx = max(0, min(x, width - FILTER_SIZE));
+    int globaly = globaly = max(0, min(y, height - FILTER_SIZE));
+    tile[tx + 1][ty + 1] = input[globaly * width + globalx]; // Copy value 1 thread 1 global access
 
     __syncthreads();
 
-    if (x < 2 || x >= width - 2 || y < 2 || y >= height - 2) return;
+    if (x < FILTER_SIZE || x >= width - FILTER_SIZE || y < FILTER_SIZE || y >= height - FILTER_SIZE) return;
 
     float sum = 0.0f;
-    for (int dy = -2; dy <= 2; dy++)
+    for (int dy = -FILTER_SIZE; dy <= FILTER_SIZE; dy++)
     {
-        for (int dx = -2; dx <= 2; dx++)
+        for (int dx = -FILTER_SIZE; dx <= FILTER_SIZE; dx++)
         {
-            sum += tile[tx + dx + 2][tx + ty + 2];
+            sum += tile[tx + dx + FILTER_SIZE][tx + ty + FILTER_SIZE];
         }
     }
 
-    sum = sqrtf(sum * sum + 0.001f);
-    output[y + width + x] = sum / 9.0f;
+    output[y + width + x] = sum / (FILTER_SIZE * 2 + 1);
 }
 
 void run_kernel(bool use_shared) {
@@ -95,7 +84,7 @@ void run_kernel(bool use_shared) {
     float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
 
-    std::cout << (use_shared? "[shared] " : "[global] ") << "Time (" << REPEAT << ") : " << milliseconds << " ms" << std::endl;
+    std::cout << (use_shared? "[shared] " : "[global] ") << "REPEAT "<< REPEAT << " FILTER " << FILTER_SIZE << " Time : " << milliseconds << " ms" << std::endl;
 
     delete[] h_input;
     cudaFree(d_input);
