@@ -27,7 +27,4 @@ If you're a student, a tinkerer, or just curious — please feel free to explore
 
 ## 📜 License
 
-This project is licensed under **GPL v3**.
-
-❗ But hey — if you find this code useful, or want to use it in a different context, **just reach out**!  
-I'm more than happy to chat, collaborate, or even loosen the license terms if it makes sense. 🍻
+This project is licensed under **MIT**.
